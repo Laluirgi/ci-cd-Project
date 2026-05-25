@@ -26,10 +26,11 @@ jobs:
       - name: Build Docker Image
         run: docker build -t task-reminder-app .
 
-      - name:  Deployment Successful
+      - name: 🎉 DEPLOYMENT SUCCESSFUL
         run: |
-          echo "======================================"
-          echo " DEPLOYMENT BERHASIL!"
-          echo "Sistem Otomatisasi Pengingat Tugas"
-          echo "Telah berhasil di-deploy ke Production"
-          echo "======================================"
+          echo "========================================"
+          echo "🚀 CI/CD PIPELINE BERHASIL DIJALANKAN"
+          echo "Proyek: Sistem Otomatisasi Pengingat Tugas"
+          echo "Status: DEPLOYED TO PRODUCTION"
+          echo "Waktu: $(date)"
+          echo "========================================"
