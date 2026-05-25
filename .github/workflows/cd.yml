@@ -5,42 +5,24 @@ on:
     branches: [main]
 
 jobs:
-  deploy-staging:
+  deploy:
     runs-on: ubuntu-latest
-    environment: staging
-    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build Docker Image
-        run: docker build -t task-reminder-app:${{ github.sha }} .
-
-      - name: Login to Docker Hub (Optional)
-        uses: docker/login-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          node-version: 20
 
-  deploy-uat:
-    needs: deploy-staging
-    runs-on: ubuntu-latest
-    environment: uat
-    
-    steps:
-      - name: Manual Approval for UAT
-        uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ secrets.APPROVAL_TOKEN }}
-          approvers: Laluirgi
-          issue-title: "Approve Deployment to UAT?"
+      - name: Install Dependencies
+        run: npm install
 
-  deploy-production:
-    needs: deploy-uat
-    runs-on: ubuntu-latest
-    environment: production
-    
-    steps:
-      - name: Deploy to Production
-        run: echo "🚀 Deploying to Production successfully!"
-        # Di sini nanti bisa ditambahkan deploy ke server / AWS / Railway, dll.
+      - name: Run Test
+        run: npm test
+
+      - name: Build Docker
+        run: docker build -t task-reminder-app .
+
+      - name: Deployment Complete
+        run: echo "🎉 Sistem Pengingat Tugas berhasil di-deploy ke Production!"
