@@ -17,10 +17,10 @@ Proyek ini adalah sistem pengingat tugas otomatis menggunakan aturan (rules) sed
 
 ```bash
 # Clone repository
-git clone <url-repository-anda>
+git clone https://github.com/Laluirgi/-Sistem-Pengingat-Tugas-CI-CD-Project.git
 
 # Masuk ke folder
-cd ci-cd-Project
+cd -Sistem-Pengingat-Tugas-CI-CD-Project
 
 # Install dependencies
 npm install
